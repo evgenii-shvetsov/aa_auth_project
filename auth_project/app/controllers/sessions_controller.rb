@@ -12,7 +12,17 @@ class SessionsController < ApplicationController
         if user.nil?
           render json: "Invalid credentials".to_json
         else
-          render json: "Welcome back #{user.username}!".to_json
+            login!(user)
+            redirect_to user_url(user)
         end
+    end
+
+    def show
+
+    end
+
+    def destroy
+        logout!
+        redirect_to new_session_url
       end
 end
